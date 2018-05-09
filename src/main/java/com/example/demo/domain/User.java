@@ -14,7 +14,6 @@ public class User {
 
 
     public User(){
-
     }
 
     public User(String username, String password, String roles) {
