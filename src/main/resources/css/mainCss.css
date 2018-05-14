@@ -6,14 +6,15 @@ a{
     text-decoration: none;
     color: white;
 }
+.card{
+margin-top: 10px;
+}
 
 /*.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: #FFA500;
     color: black;
 }
-#3-logo{
-    width: 40px;
-}
+
 td{
     color: #fff;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;

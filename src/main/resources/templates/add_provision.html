@@ -2,94 +2,116 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Tilføj provision</title>
+    <div th:replace="header_admin :: header-css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../css/mainCss.css"/>
 </head>
 <body>
+<div th:replace="header_admin :: header"/>
+<div class="container" style="margin-top: 100px;">
+    <h1>Provision</h1>
+</div>
 
-<form class="form-horizontal" method="Post" th:action="@{/add_provision}" th:object="${provision}">
+<div class="container">
 
-    <div class="container">
+    <form method="Post" th:action="@{/add_provision}" th:object="${provision}">
+<div class="row">
+    <div class="col-4">
+        <div class="card ">
+            <div class="card-header">Ga</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="gaLow" class="control-label">low</label>
+                    <input type="text" class="form-control" id="gaLow" name="gaLow" placeholder="GA-low"
+                           required="true" th:field="*{ga_low_amount}"/>
+                </div>
 
-        <div class="form-group">
-            <label for="test1" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="test1" name="titel" placeholder="Skriv en titel" required="true" th:field="*{ga_low_amount}"/>
+                <div class="form-group">
+                    <label for="gaMedium" class="control-label">Medium</label>
+                    <input type="text" class="form-control" id="gaMedium" name="gaMedium" placeholder="GA-medium"
+                           required="true" th:field="*{ga_med_amount}"/>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="gaHigh" class="control-label">High</label>
+                    <input type="text" class="form-control" id="gaHigh" name="gaHigh" placeholder="GA-high"
+                           required="true" th:field="*{ga_high_amount}"/>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="gaSpuperHigh" class="control-label">Super High</label>
+                    <input type="text" class="form-control" id="gaSpuperHigh" name="gaSpuperHigh"
+                           placeholder="GA-super high"
+                           required="true" th:field="*{ga_super_high_amount}"/>
+
+                </div>
+            </div>
+        </div>
+</div>
+<div class="col-4">
+        <div class="card">
+            <div class="card-header">Fl</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="flLow" class="control-label">low</label>
+                    <input type="text" class="form-control" id="flLow" name="flLow" placeholder="Fl-low"
+                           required="true" th:field="*{fl_low_amount}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="flMedium" class="control-label">medium</label>
+                    <input type="text" class="form-control" id="flMedium" name="flMedium" placeholder="Fl-medium"
+                           required="true" th:field="*{fl_med_amount}"/>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="flHigh" class="control-label">High</label>
+                    <input type="text" class="form-control" id="flHigh" name="flHigh" placeholder="Fl-high"
+                           required="true" th:field="*{fl_high_amount}"/>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="flSuperHigh" class="control-label">super High</label>
+                    <input type="text" class="form-control" id="flSuperHigh" name="flSuperHigh"
+                           placeholder="Fl-super high"
+                           required="true" th:field="*{fl_super_high_amount}"/>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="col-4">
+        <div class="card">
+            <div class="card-header">Vas</div>
+            <div class="form-group card-body">
+                <input type="text" class="form-control" id="vas" name="Vas" placeholder="Vas"
+                       required="true" th:field="*{vas_amount}"/>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="test2" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="test2" name="titel" placeholder="Skriv en titel" required="true" th:field="*{ga_med_amount}"/>
+        <div class="card">
+            <div class="card-header">Accessory</div>
+            <div class="form-group card-body">
+                <input type="text" class="form-control" id="accessory" name="accessory" placeholder="Accessory"
+                       required="true" th:field="*{accessory_amount}"/>
             </div>
         </div>
-
-        <div class="form-group">
-            <label for="test3" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="test3" name="titel" placeholder="Skriv en titel" required="true" th:field="*{ga_high_amount}"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="test4" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="test4" name="titel" placeholder="Skriv en titel" required="true" th:field="*{ga_super_high_amount}"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="test5" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="test5" name="titel" placeholder="Skriv en titel" required="true" th:field="*{fl_low_amount}"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="test6" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="test6" name="titel" placeholder="Skriv en titel" required="true" th:field="*{fl_med_amount}"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="test7" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="test7" name="titel" placeholder="Skriv en titel" required="true" th:field="*{fl_high_amount}"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="test8" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="test8" name="titel" placeholder="Skriv en titel" required="true" th:field="*{fl_super_high_amount}"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="test9" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="test9" name="titel" placeholder="Skriv en titel" required="true" th:field="*{vas_amount}"/>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="test10" class="col-sm-2 control-label">Titel</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="test10" name="titel" placeholder="Skriv en titel" required="true" th:field="*{accessory_amount}"/>
-            </div>
-        </div>
-
-        
-        <div class="form-group">
+</div>
+        <div class="form-group" style="margin-top: 20px;">
             <div class="col-sm-10 col-sm-offset-2">
-                <input class="btn btn-primary" type="submit" value="Opret "/>
+                <input class="btn btn-primary" type="submit" value="Opret"/>
             </div>
         </div>
-    </div>
 
-
-</form>
+    </form>
+</div>
 
 
 </body>
