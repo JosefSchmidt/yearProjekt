@@ -11,7 +11,7 @@ public class Sale {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int provision_id;
+    private int sale_id;
     private int ga_low_amount;
     private int ga_med_amount;
     private int ga_high_amount;
@@ -24,15 +24,14 @@ public class Sale {
 
     private int vas_amount;
 
-    private int accessories_amount;
+    private int accessory_amount;
 
 
 
     public Sale(){
     }
 
-    public Sale(int provision_id, int ga_low_amount, int ga_med_amount, int ga_high_amount, int ga_super_high_amount, int fl_low_amount, int fl_med_amount, int fl_high_amount, int fl_super_high_amount, int vas_amount, int accessories_amount) {
-        this.provision_id = provision_id;
+    public Sale(int ga_low_amount, int ga_med_amount, int ga_high_amount, int ga_super_high_amount, int fl_low_amount, int fl_med_amount, int fl_high_amount, int fl_super_high_amount, int vas_amount, int accessory_amount) {
         this.ga_low_amount = ga_low_amount;
         this.ga_med_amount = ga_med_amount;
         this.ga_high_amount = ga_high_amount;
@@ -42,15 +41,15 @@ public class Sale {
         this.fl_high_amount = fl_high_amount;
         this.fl_super_high_amount = fl_super_high_amount;
         this.vas_amount = vas_amount;
-        this.accessories_amount = accessories_amount;
+        this.accessory_amount = accessory_amount;
     }
 
-    public int getProvision_id() {
-        return provision_id;
+    public int getSale_id() {
+        return sale_id;
     }
 
-    public void setProvision_id(int provision_id) {
-        this.provision_id = provision_id;
+    public void setSale_id(int sale_id) {
+        this.sale_id = sale_id;
     }
 
     public int getGa_low_amount() {
@@ -125,11 +124,11 @@ public class Sale {
         this.vas_amount = vas_amount;
     }
 
-    public int getAccessories_amount() {
-        return accessories_amount;
+    public int getAccessory_amount() {
+        return accessory_amount;
     }
 
-    public void setAccessories_amount(int accessories_amount) {
-        this.accessories_amount = accessories_amount;
+    public void setAccessory_amount(int accessory_amount) {
+        this.accessory_amount = accessory_amount;
     }
 }

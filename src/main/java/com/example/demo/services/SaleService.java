@@ -13,7 +13,7 @@ public interface SaleService {
                  int fl_high_amount,
                  int fl_super_high_amount,
                  int vas_amount,
-                 int accessories_amount);
+                 int accessory_amount);
 
 
 
