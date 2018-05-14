@@ -23,29 +23,22 @@
             <th>Stilling</th>
             <th>Mål</th>
             <th>Opnået</th>
-            <th>Ga</th>
-            <th>Fl</th>
-            <th>Vas</th>
-            <th>Tilbehør</th>
             <th></th>
 
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="worker : ${workers}">
+        <tr th:each="employee : ${employees}">
 
-            <td th:text="${}"/>
-            <td th:text="${}"/>
-            <td th:text="${}"/>
-            <td th:text="${}"/>
-            <td th:text="${}"/>
-            <td th:text="${}"/>
-            <td th:text="${}"/>
-            <td th:text="${}"/>
+            <td th:text="${employee.name}"/>
+            <td th:text="${employee.position}"/>
+            <td th:text="${employee.provision_goal}"/>
+            <td th:text="${employee.provision_accumulated}"/>
+
             <td>
-                <a class="btn btn-outline-success" th:href="@{'/Sale' + worker.id}">Salg</a>
-                <a class="btn btn-outline-danger" th:href="@{'/delete' + worker.id}">Slet Medarbejder</a>
+                <a class="btn btn-outline-success" th:href="@{'/Sale' + employee.employee_id}">Salg</a>
+                <a class="btn btn-outline-danger" th:href="@{'/delete' + employee.employee_id}">Slet Medarbejder</a>
             </td>
 
         </tr>

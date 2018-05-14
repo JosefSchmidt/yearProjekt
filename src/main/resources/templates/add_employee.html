@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="../css/mainCss.css"/>
 </head>
 <body>
-<div th:replace="header_admin :: header"/>
+
+<!--<div th:replace="header_admin :: header"/>-->
+
 <div class="container" style="margin-top: 100px;">
     <h1>Provision</h1>
 </div>
@@ -29,8 +31,9 @@
 
         <div class="form-group">
             <label for="goal">provision mål</label>
-            <input class="form-control" id="goal" type="text" required th:field="*{}"/>
+            <input class="form-control" id="goal" type="text" required th:field="*{provision_goal}"/>
         </div>
+
 
 
 

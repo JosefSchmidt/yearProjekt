@@ -11,24 +11,30 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long employee_id;
     private String name;
     private String position;
+    private int provision_goal;
+    private int provision_accumulated;
 
 
-    private int accumulated_Provision;
-    private int goal_Provision;
-
-    public Employee(){
+    public Employee (){
 
     }
 
-    public long getId() {
-        return id;
+    public Employee(String name, String position, int provision_goal, int provision_accumulated) {
+        this.name = name;
+        this.position = position;
+        this.provision_goal = provision_goal;
+        this.provision_accumulated = provision_accumulated;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public long getEmployee_id() {
+        return employee_id;
+    }
+
+    public void setEmployee_id(long employee_id) {
+        this.employee_id = employee_id;
     }
 
     public String getName() {
@@ -47,30 +53,30 @@ public class Employee {
         this.position = position;
     }
 
-    public int getAccumulated_Provision() {
-        return accumulated_Provision;
+    public int getProvision_goal() {
+        return provision_goal;
     }
 
-    public void setAccumulated_Provision(int accumulated_Provision) {
-        this.accumulated_Provision = accumulated_Provision;
+    public void setProvision_goal(int provision_goal) {
+        this.provision_goal = provision_goal;
     }
 
-    public int getGoal_Provision() {
-        return goal_Provision;
+    public int getProvision_accumulated() {
+        return provision_accumulated;
     }
 
-    public void setGoal_Provision(int goal_Provision) {
-        this.goal_Provision = goal_Provision;
+    public void setProvision_accumulated(int provision_accumulated) {
+        this.provision_accumulated = provision_accumulated;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + id +
+                "employee_id=" + employee_id +
                 ", name='" + name + '\'' +
                 ", position='" + position + '\'' +
-                ", accumulated_Provision=" + accumulated_Provision +
-                ", goal_Provision=" + goal_Provision +
+                ", provision_goal=" + provision_goal +
+                ", provision_accumulated=" + provision_accumulated +
                 '}';
     }
 }
