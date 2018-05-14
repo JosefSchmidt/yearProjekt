@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.Sale;
+import com.example.demo.services.ProvisionService;
 import com.example.demo.services.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProvisionController {
 
 
-//    @Qualifier("provisionServiceImpl")
-//    @Autowired
-//    ProvisionService provisionService;
+    @Qualifier("provisionServiceImpl")
+    @Autowired
+    ProvisionService provisionService;
 
-    @Qualifier("saleServiceImpl")
+
     @Autowired
     SaleService saleService;
 
@@ -40,15 +41,15 @@ public class ProvisionController {
                                 @RequestParam int fl_high_amount,
                                 @RequestParam int fl_super_high_amount,
                                 @RequestParam int vas_amount,
-                                @RequestParam int accessories_amount){
+                                @RequestParam int accessory_amount){
 
 
-//        provisionService.addProvision(ga_low_amount,ga_med_amount,ga_high_amount,ga_super_high_amount,
-//                fl_low_amount,fl_med_amount,fl_high_amount,fl_super_high_amount,vas_amount,accessories_amount);
-//
+        provisionService.addProvision(ga_low_amount,ga_med_amount,ga_high_amount,ga_super_high_amount,
+                fl_low_amount,fl_med_amount,fl_high_amount,fl_super_high_amount,vas_amount,accessory_amount);
+
 
         saleService.addSale(ga_low_amount,ga_med_amount,ga_high_amount,ga_super_high_amount,
-                fl_low_amount,fl_med_amount,fl_high_amount,fl_super_high_amount,vas_amount,accessories_amount);
+                fl_low_amount,fl_med_amount,fl_high_amount,fl_super_high_amount,vas_amount,accessory_amount);
 
 
 
