@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Tilføj provision</title>
-    <div th:replace="header_admin :: header-css"/>
+    <div th:replace="header :: header-css"/>
     <link rel="stylesheet" href="../css/mainCss.css"/>
 </head>
 <body>
@@ -28,7 +28,7 @@
             <label for="position">position</label>
             <input class="form-control" id="position" type="text" required th:field="*{position}"/>
         </div>
-        
+
         <div class="form-group">
             <label for="goal">provision mål</label>
             <input class="form-control" id="goal" type="text" required th:field="*{provision_goal}"/>
