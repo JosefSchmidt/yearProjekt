@@ -19,19 +19,16 @@ public class LoginController {
     }
 
 
-    @GetMapping(value = {"","/","/index"})
+    @GetMapping(value = {"/"})
     public String index(){
 
-        if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-
-            return "redirect:/home_admin";
-        }
-        return "redirect:/login";
+        return "redirect:/home_admin";
     }
 
     @PostMapping(value = "/logout")
     public String logout(){
-        return "login";
+
+        return "redirect:/home";
     }
 
 }

@@ -8,6 +8,8 @@ public interface EmployeeService {
 
     List viewEmployee();
 
+    void deleteEmployee(int id);
+
 
 
 }

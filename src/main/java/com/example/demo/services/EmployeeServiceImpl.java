@@ -52,4 +52,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees;
     }
 
+    @Override
+    public void deleteEmployee(int id) {
+            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+            jdbcTemplate.update("DELETE From employee WHERE employee_id="+id);
+    }
+
+
 }
