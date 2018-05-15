@@ -65,20 +65,21 @@
         <thead>
         <tr>
             <th></th>
-            <th>Ga</th>
-            <th>Fl</th>
+            <th>GA</th>
+            <th>FL</th>
             <th>Vas</th>
-            <th>Accessory</th>
+            <th>Tilbehør</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td class="text-center d-flex">Butiksmål</td>
-            <td th:text="${store.ga_sale_total}"/>
-            <td th:text="${store.fl_sale_total}"/>
-            <td th:text="${store.vas_sale_total}"/>
-            <td th:text="${store.accessories_sale_total}"/>
+            <td th:text="${ga_total}"/>
+            <td th:text="${fl_total}"/>
+            <td th:text="${vas_total}"/>
+            <td th:text="${accessory_total}"/>
+
             <td><a class="btn btn-outline-danger" href="@{/}">Rediger butiskmål</a></td>
         </tr>
         </tbody>
