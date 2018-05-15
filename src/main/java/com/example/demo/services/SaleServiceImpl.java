@@ -42,6 +42,7 @@ public class SaleServiceImpl implements SaleService {
                         fl_super_high_amount,
                         vas_amount,
                         accessory_amount);
-
     }
+
+
 }

@@ -34,9 +34,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
 
+<<<<<<< Updated upstream
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/admin/*").hasRole("ADMIN")
                 .antMatchers("/home", "/add_provision").permitAll()
+=======
+        http.csrf().disable().authorizeRequests().antMatchers("/home").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+>>>>>>> Stashed changes
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

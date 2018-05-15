@@ -15,11 +15,12 @@ public class LoginController {
 
     @GetMapping(value = {"/login",})
     public String login(){
+
         return "login";
     }
 
 
-    @GetMapping(value = {"/"})
+    @GetMapping(value = {"/", ""})
     public String index(){
 
         return "redirect:/home_admin";
@@ -28,7 +29,7 @@ public class LoginController {
     @PostMapping(value = "/logout")
     public String logout(){
 
-        return "redirect:/home";
+        return "login";
     }
 
 }

@@ -19,8 +19,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private DataSource dataSource;
 
+
+
+
+
     @Override
     public void addEmployee(String name, String position, int provision_goal) {
+
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.update("INSERT INTO employee(name, position, provision_goal) VALUES (?, ?, ?)", name, position, provision_goal);
 
@@ -28,7 +33,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List viewEmployee() {
-
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         String sql = "SELECT * FROM employee";
@@ -40,6 +44,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         for (Map row : rows) {
 
             Employee employee = new Employee();
+
+
             employee.setEmployee_id((int) (row.get("employee_id")));
             employee.setName((String) (row.get("name")));
             employee.setPosition((String) (row.get("position")));
@@ -57,6 +63,15 @@ public class EmployeeServiceImpl implements EmployeeService {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
             jdbcTemplate.update("DELETE From employee WHERE employee_id="+id);
     }
+
+    @Override
+    public int getEmployeeId(int id) {
+            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+            return jdbcTemplate.queryForObject("SELECT employee_id FROM employee WHERE employee_id="+id, Integer.class);
+    }
+
+
+
 
 
 }

@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Provision;
 import com.example.demo.domain.Sale;
+import com.example.demo.services.EmployeeService;
 import com.example.demo.services.SaleService;
+import com.example.demo.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,16 +17,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProvisionController {
 
+    @Autowired
+    StoreService storeService;
 
     @Autowired
     SaleService saleService;
 
-    @GetMapping(value = "/add_provision")
-    public String add_provision(Model model){
 
-        model.addAttribute("provision", new Sale());
+    @Autowired
+    EmployeeService employeeService;
+
+    @GetMapping(value = "/add_provision{employee_id}")
+    public String add_provision(Model model, @PathVariable("employee_id") int employee_id){
+
+        model.addAttribute("sale", new Sale());
+        model.addAttribute("id", employeeService.getEmployeeId(employee_id));
 
         return "add_provision";
+
     }
 
     @PostMapping(value = "/add_provision")

@@ -11,7 +11,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long employee_id;
+    private int employee_id;
     private String name;
     private String position;
     private int provision_goal;
@@ -29,11 +29,11 @@ public class Employee {
         this.provision_accumulated = provision_accumulated;
     }
 
-    public long getEmployee_id() {
+    public int getEmployee_id() {
         return employee_id;
     }
 
-    public void setEmployee_id(long employee_id) {
+    public void setEmployee_id(int employee_id) {
         this.employee_id = employee_id;
     }
 

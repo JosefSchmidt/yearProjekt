@@ -10,6 +10,7 @@ public interface EmployeeService {
 
     void deleteEmployee(int id);
 
+    int getEmployeeId(int id);
 
 
 }
