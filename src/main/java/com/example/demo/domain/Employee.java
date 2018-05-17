@@ -11,7 +11,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employee_id;
+    private int id;
     private String name;
     private String position;
     private int provision_goal;
@@ -29,12 +29,12 @@ public class Employee {
         this.provision_accumulated = provision_accumulated;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
+    public int getId() {
+        return id;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -67,16 +67,5 @@ public class Employee {
 
     public void setProvision_accumulated(int provision_accumulated) {
         this.provision_accumulated = provision_accumulated;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "employee_id=" + employee_id +
-                ", name='" + name + '\'' +
-                ", position='" + position + '\'' +
-                ", provision_goal=" + provision_goal +
-                ", provision_accumulated=" + provision_accumulated +
-                '}';
     }
 }

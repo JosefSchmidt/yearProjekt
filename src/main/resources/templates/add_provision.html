@@ -15,12 +15,17 @@
 
 <div class="container">
 
+
+
+
     <form method="Post" th:action="@{/add_provision}" th:object="${sale}">
 <div class="row">
     <div class="col-4">
         <div class="card ">
             <div class="card-header">Ga</div>
             <div class="card-body">
+
+
                 <div class="form-group">
                     <label for="gaLow" class="control-label">low</label>
                     <input type="text" class="form-control" id="gaLow" name="gaLow" placeholder="GA-low"
@@ -31,7 +36,6 @@
                     <label for="gaMedium" class="control-label">Medium</label>
                     <input type="text" class="form-control" id="gaMedium" name="gaMedium" placeholder="GA-medium"
                            required="true" th:field="*{ga_med_amount}"/>
-
                 </div>
 
                 <div class="form-group">
@@ -97,10 +101,18 @@
         <div class="card">
             <div class="card-header">Accessory</div>
             <div class="form-group card-body">
-                <input type="text" class="form-control" id="accessory" name="accessory" placeholder="Accessory"
+                <input type="text" class="form-control" id="accessory"  name="accessory" placeholder="Accessory"
                        required="true" th:field="*{accessory_amount}"/>
             </div>
         </div>
+
+
+        <div>
+            <input type="hidden" th:field="*{employee_id}" th:value="${id}"/>
+        </div>
+
+
+
 </div>
         <div class="form-group" style="margin-top: 20px;">
             <div class="col-sm-10 col-sm-offset-2">
@@ -109,7 +121,10 @@
         </div>
 
 </div>
+
     </form>
+
+
 
 
 </div>

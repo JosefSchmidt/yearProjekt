@@ -45,36 +45,35 @@
             <td th:text="${employee.provision_goal}"/>
             <td th:text="${employee.provision_accumulated}"/>
             <td>
-                <a  th:href="${'/add_provision' + employee.employee_id}" class="btn btn-outline-success">Salg</a>
+                <a  th:href="${'/add_provision?id=' + employee.id}" class="btn btn-outline-success">Salg</a>
             </td>
 
         </tr>
         </tbody>
     </table>
-<<<<<<< Updated upstream
+
 
     <table class="table table-striped table-bordered table-hover table-dark">
         <thead>
         <tr>
             <th></th>
-            <th>Ga</th>
-            <th>Fl</th>
+            <th>GA</th>
+            <th>FL</th>
             <th>Vas</th>
-            <th>Accessory</th>
+            <th>Tilbehør</th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td class="text-center d-flex">Butiksmål</td>
-            <td th:text="${store.ga_sale_total}"/>
-            <td th:text="${store.fl_sale_total}"/>
-            <td th:text="${store.vas_sale_total}"/>
-            <td th:text="${store.accessories_sale_total}"/>
+            <td th:text="${ga_total}"/>
+            <td th:text="${fl_total}"/>
+            <td th:text="${vas_total}"/>
+            <td th:text="${accessory_total}"/>
         </tr>
         </tbody>
     </table>
-=======
->>>>>>> Stashed changes
+
 </div>
 
 

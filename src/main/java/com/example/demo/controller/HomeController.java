@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.services.EmployeeService;
-import com.example.demo.services.StoreService;
+import com.example.demo.dao.EmployeeDAO;
+import com.example.demo.dao.StoreDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -14,22 +14,22 @@ public class HomeController {
 
 
     @Autowired
-    StoreService storeService;
+    StoreDAO storeDAO;
 
     @Autowired
-    EmployeeService employeeService;
+    EmployeeDAO employeeDAO;
 
 
     @GetMapping(value = "home")
     public String home(Model model){
 
 
-        model.addAttribute("employees", employeeService.viewEmployee());
+        model.addAttribute("employees", employeeDAO.viewEmployee());
 
-        model.addAttribute("ga_total", storeService.viewTotalGa());
-        model.addAttribute("fl_total", storeService.viewTotalFl());
-        model.addAttribute("vas_total", storeService.viewTotalVas());
-        model.addAttribute("accessory_total", storeService.viewTotalVas());
+        model.addAttribute("ga_total", storeDAO.viewTotalGa());
+        model.addAttribute("fl_total", storeDAO.viewTotalFl());
+        model.addAttribute("vas_total", storeDAO.viewTotalVas());
+        model.addAttribute("accessory_total", storeDAO.viewTotalVas());
 
         return "home";
     }
@@ -38,7 +38,7 @@ public class HomeController {
     @GetMapping(value = "/home_admin")
     public String home_admin(Model model){
 
-        model.addAttribute("employees", employeeService.viewEmployee());
+        model.addAttribute("employees", employeeDAO.viewEmployee());
 
         return "home_admin";
     }

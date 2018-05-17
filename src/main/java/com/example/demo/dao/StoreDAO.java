@@ -1,6 +1,6 @@
-package com.example.demo.services;
+package com.example.demo.dao;
 
-public interface StoreService {
+public interface StoreDAO {
 
 
     int viewTotalGa();

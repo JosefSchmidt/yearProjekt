@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.Employee;
-import com.example.demo.services.EmployeeService;
+import com.example.demo.dao.EmployeeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EmployeeController {
 
     @Autowired
-    EmployeeService employeeService;
+    EmployeeDAO employeeDAO;
 
 
     @GetMapping(value = "/add_employee")
@@ -27,7 +27,7 @@ public class EmployeeController {
     @PostMapping(value = "/add_employee")
     public String add_employee(@RequestParam String name, @RequestParam String position, @RequestParam int provision_goal){
 
-        employeeService.addEmployee(name, position, provision_goal);
+        employeeDAO.addEmployee(name, position, provision_goal);
 
         return "redirect:/home_admin";
     }

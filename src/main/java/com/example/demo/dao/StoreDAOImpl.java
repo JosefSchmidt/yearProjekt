@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.dao;
 
 import com.example.demo.domain.Provision;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Service
-public class StoreServiceImpl implements StoreService{
+public class StoreDAOImpl implements StoreDAO {
 
     @Qualifier("dataSource")
     @Autowired
@@ -28,30 +28,31 @@ public class StoreServiceImpl implements StoreService{
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
+        //List<Integer> modtager et Integer obejct via aggregate funktionen, sum, som lægger alle rows fra en attribut - hertil ga_low_amount.
         List<Integer> list_low = jdbcTemplate.queryForList("SELECT SUM(ga_low_amount) FROM sale", Integer.class);
 
+        //rows fra tabellen, sale, lægges sammen
         for (int i = 0; i <list_low.size(); i++) {
-            low_total += list_low.get(i);
+            low_total = list_low.get(i);
         }
 
-        low_total = low_total * Provision.getGa_low();
 
         List<Integer> list_med = jdbcTemplate.queryForList("SELECT SUM(ga_med_amount) FROM sale", Integer.class);
 
         for (int i = 0; i <list_med.size(); i++) {
-            med_total += list_med.get(i);
+            med_total = list_med.get(i);
         }
 
         List<Integer> list_high = jdbcTemplate.queryForList("SELECT SUM(ga_high_amount) FROM sale", Integer.class);
 
         for (int i = 0; i <list_high.size(); i++) {
-            high_total += list_high.get(i);
+            high_total = list_high.get(i);
         }
 
         List<Integer> list_super_high = jdbcTemplate.queryForList("SELECT SUM(ga_super_high_amount) FROM sale", Integer.class);
 
-        for (int i = 0; i <list_high.size(); i++) {
-            super_high_total += list_super_high.get(i);
+        for (int i = 0; i <list_super_high.size(); i++) {
+            super_high_total = list_super_high.get(i);
         }
 
         return low_total + med_total + high_total + super_high_total;
@@ -70,25 +71,25 @@ public class StoreServiceImpl implements StoreService{
         List<Integer> list_low = jdbcTemplate.queryForList("SELECT SUM(fl_low_amount) FROM sale", Integer.class);
 
         for (int i = 0; i <list_low.size(); i++) {
-            low_total += list_low.get(i);
+            low_total = list_low.get(i);
         }
 
         List<Integer> list_med = jdbcTemplate.queryForList("SELECT SUM(fl_med_amount) FROM sale", Integer.class);
 
         for (int i = 0; i <list_med.size(); i++) {
-            med_total += list_med.get(i);
+            med_total = list_med.get(i);
         }
 
         List<Integer> list_high = jdbcTemplate.queryForList("SELECT SUM(fl_high_amount) FROM sale", Integer.class);
 
         for (int i = 0; i <list_high.size(); i++) {
-            high_total += list_high.get(i);
+            high_total = list_high.get(i);
         }
 
         List<Integer> list_super_high = jdbcTemplate.queryForList("SELECT SUM(fl_super_high_amount) FROM sale", Integer.class);
 
         for (int i = 0; i <list_high.size(); i++) {
-            super_high_total += list_super_high.get(i);
+            super_high_total = list_super_high.get(i);
         }
 
         return low_total + med_total + high_total + super_high_total;
@@ -106,7 +107,7 @@ public class StoreServiceImpl implements StoreService{
         List<Integer> list_vas = jdbcTemplate.queryForList("SELECT SUM(vas_amount) FROM sale", Integer.class);
 
         for (int i = 0; i <list_vas.size(); i++) {
-            vas_total += list_vas.get(i);
+            vas_total = list_vas.get(i);
         }
 
         return vas_total;
@@ -122,10 +123,8 @@ public class StoreServiceImpl implements StoreService{
         List<Integer> list_accessory = jdbcTemplate.queryForList("SELECT SUM(accessory_amount) FROM sale", Integer.class);
 
         for (int i = 0; i <list_accessory.size(); i++) {
-            accessory_total += list_accessory.get(i);
+            accessory_total = list_accessory.get(i);
         }
-
         return accessory_total;
-
     }
 }
