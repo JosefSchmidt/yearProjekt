@@ -45,7 +45,7 @@
             <td th:text="${employee.provision_goal}"/>
             <td th:text="${employee.provision_accumulated}"/>
             <td>
-                <a  th:href="${'/add_provision' + employee.id}" class="btn btn-outline-success">Salg</a>
+                <a  th:href="${'/add_provision?id=' + employee.id}" class="btn btn-outline-success">Salg</a>
             </td>
 
         </tr>

@@ -13,7 +13,7 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int sale_id;
 
-
+    private int employee_id;
 
     private int ga_low_amount;
     private int ga_med_amount;
@@ -34,8 +34,12 @@ public class Sale {
     public Sale(){
     }
 
+    public Sale(int employee_id) {
+        this.employee_id = employee_id;
+    }
 
-    public Sale(int ga_low_amount, int ga_med_amount, int ga_high_amount, int ga_super_high_amount, int fl_low_amount, int fl_med_amount, int fl_high_amount, int fl_super_high_amount, int vas_amount, int accessory_amount) {
+    public Sale(int employee_id, int ga_low_amount, int ga_med_amount, int ga_high_amount, int ga_super_high_amount, int fl_low_amount, int fl_med_amount, int fl_high_amount, int fl_super_high_amount, int vas_amount, int accessory_amount) {
+        this.employee_id = employee_id;
         this.ga_low_amount = ga_low_amount;
         this.ga_med_amount = ga_med_amount;
         this.ga_high_amount = ga_high_amount;
@@ -55,6 +59,14 @@ public class Sale {
 
     public void setSale_id(int sale_id) {
         this.sale_id = sale_id;
+    }
+
+    public int getEmployee_id() {
+        return employee_id;
+    }
+
+    public void setEmployee_id(int employee_id) {
+        this.employee_id = employee_id;
     }
 
     public int getGa_low_amount() {
