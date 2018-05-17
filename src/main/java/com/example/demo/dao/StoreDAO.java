@@ -2,7 +2,6 @@ package com.example.demo.dao;
 
 public interface StoreDAO {
 
-
     int viewTotalGa();
 
     int viewTotalFl();

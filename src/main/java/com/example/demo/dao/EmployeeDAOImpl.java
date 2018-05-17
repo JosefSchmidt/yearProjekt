@@ -20,7 +20,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     private DataSource dataSource;
 
 
-    //Tilføjer employee til databasen ved brug af et prepared statement
+    //tilføjer employee til databasen ved brug af et prepared statement
     @Override
     public void addEmployee(String name, String position, int provision_goal) {
 
@@ -30,7 +30,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
 
-    //returner en List af Employees
+    //returner en List af Employee
     @Override
     public List viewEmployee() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -75,11 +75,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 
 
-    @Override
-    public int getEmployeeId(int id) {
-            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-            return jdbcTemplate.queryForObject("SELECT id FROM employee WHERE id="+id, Integer.class);
-    }
+//    @Override
+//    public int getEmployee(int id) {
+//            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//            return jdbcTemplate.queryForObject("SELECT id FROM employee WHERE id="+id, Integer.class);
+//    }
 
 
 

@@ -14,7 +14,6 @@ public class Provision {
 
     private final static int vas = 2;
 
-    
     private final static int accessories = 2;
 
     public Provision(){
