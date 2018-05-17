@@ -1,8 +1,8 @@
-package com.example.demo.services;
+package com.example.demo.dao;
 
 import java.util.List;
 
-public interface EmployeeService {
+public interface EmployeeDAO {
 
     void addEmployee(String name, String position, int provision_goal);
 
@@ -10,7 +10,8 @@ public interface EmployeeService {
 
     void deleteEmployee(int id);
 
-    int getEmployeeId(int id);
+    public int getEmployeeId(int id);
+
 
 
 }

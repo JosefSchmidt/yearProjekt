@@ -1,7 +1,9 @@
-package com.example.demo.services;
+package com.example.demo.dao;
 
 
-public interface SaleService {
+import com.example.demo.domain.Sale;
+
+public interface SaleDAO {
 
 
     void addSale(int ga_low_amount,
@@ -13,7 +15,9 @@ public interface SaleService {
                  int fl_high_amount,
                  int fl_super_high_amount,
                  int vas_amount,
-                 int accessory_amount);
+                 int accessory_amount,
+                 int id);
+
 
 
 

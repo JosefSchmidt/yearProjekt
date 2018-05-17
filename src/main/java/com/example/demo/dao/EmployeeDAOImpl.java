@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.dao;
 
 import com.example.demo.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeDAOImpl implements EmployeeDAO {
 
 
     @Qualifier("dataSource")
@@ -20,9 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private DataSource dataSource;
 
 
-
-
-
+    //Tilføjer employee til databasen ved brug af et prepared statement
     @Override
     public void addEmployee(String name, String position, int provision_goal) {
 
@@ -31,43 +29,56 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
+
+    //returner en List af Employees
     @Override
     public List viewEmployee() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         String sql = "SELECT * FROM employee";
 
+
         List<Employee> employees = new ArrayList<>();
 
+
+        //List af Employee. Map definer keys (Employee attributter) til value (Employee instance)
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
 
+        //For loop af rows (Employees)
         for (Map row : rows) {
 
             Employee employee = new Employee();
 
-
-            employee.setEmployee_id((int) (row.get("employee_id")));
+            //Angiver keys til value
+            employee.setId((int) (row.get("id")));
             employee.setName((String) (row.get("name")));
             employee.setPosition((String) (row.get("position")));
             employee.setProvision_goal((int) (row.get("provision_goal")));
             employee.setProvision_accumulated((int) (row.get("provision_accumulated")));
 
+
+            //Tilføjer til vores employees list
             employees.add(employee);
+
         }
 
         return employees;
     }
 
+    //Fjerner Employee fra databasen på baggrund af id
     @Override
     public void deleteEmployee(int id) {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-            jdbcTemplate.update("DELETE From employee WHERE employee_id="+id);
+            jdbcTemplate.update("DELETE From employee WHERE id="+id);
     }
+
+
+
 
     @Override
     public int getEmployeeId(int id) {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-            return jdbcTemplate.queryForObject("SELECT employee_id FROM employee WHERE employee_id="+id, Integer.class);
+            return jdbcTemplate.queryForObject("SELECT id FROM employee WHERE id="+id, Integer.class);
     }
 
 
