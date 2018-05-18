@@ -26,9 +26,7 @@ public class Sale {
     private int fl_super_high_amount;
 
     private int vas_amount;
-
     private int accessory_amount;
-
 
 
     public Sale(){
@@ -38,19 +36,7 @@ public class Sale {
         this.employee_id = employee_id;
     }
 
-    public Sale(int employee_id, int ga_low_amount, int ga_med_amount, int ga_high_amount, int ga_super_high_amount, int fl_low_amount, int fl_med_amount, int fl_high_amount, int fl_super_high_amount, int vas_amount, int accessory_amount) {
-        this.employee_id = employee_id;
-        this.ga_low_amount = ga_low_amount;
-        this.ga_med_amount = ga_med_amount;
-        this.ga_high_amount = ga_high_amount;
-        this.ga_super_high_amount = ga_super_high_amount;
-        this.fl_low_amount = fl_low_amount;
-        this.fl_med_amount = fl_med_amount;
-        this.fl_high_amount = fl_high_amount;
-        this.fl_super_high_amount = fl_super_high_amount;
-        this.vas_amount = vas_amount;
-        this.accessory_amount = accessory_amount;
-    }
+
 
 
     public int getSale_id() {

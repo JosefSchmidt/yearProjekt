@@ -23,10 +23,7 @@ public class ProvisionController {
 
         Sale sale = new Sale(id);
 
-
         model.addAttribute("sale", sale);
-
-
 
         return "add_provision";
     }

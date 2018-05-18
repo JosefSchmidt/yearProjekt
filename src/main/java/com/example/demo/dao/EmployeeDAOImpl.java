@@ -69,7 +69,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public void deleteEmployee(int id) {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+            jdbcTemplate.update("DELETE  FROM sale WHERE employee_id="+id);
             jdbcTemplate.update("DELETE From employee WHERE id="+id);
+
     }
 
 

@@ -26,6 +26,7 @@ public class HomeController {
 
         model.addAttribute("employees", employeeDAO.viewEmployee());
 
+
         model.addAttribute("ga_total", storeDAO.viewTotalGa());
         model.addAttribute("fl_total", storeDAO.viewTotalFl());
         model.addAttribute("vas_total", storeDAO.viewTotalVas());

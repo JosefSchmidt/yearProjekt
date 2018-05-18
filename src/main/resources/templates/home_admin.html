@@ -36,6 +36,7 @@
             <td th:text="${employee.position}"/>
             <td th:text="${employee.provision_goal}"/>
             <td th:text="${employee.provision_accumulated}"/>
+            <td> <a class="btn btn-outline-danger" th:href="${'/deleteEmployee?id=' + employee.id}">Slet</a></td>
 
             <td>
                 <a class="btn btn-outline-success" th:href="@{'/Sale' + employee.employee_id}">Salg</a>

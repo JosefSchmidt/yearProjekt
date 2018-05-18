@@ -15,7 +15,7 @@ public interface SaleDAO {
     void deleteSale(int id);
 
 
-    int viewProvisionTotal(int id);
+    void viewProvisionTotal(int id);
 
 
 
