@@ -22,7 +22,6 @@ public class ProvisionController {
     public String add_provision(Model model, @RequestParam("id") int id){
 
         Sale sale = new Sale(id);
-
         model.addAttribute("sale", sale);
 
         return "add_provision";
@@ -32,6 +31,14 @@ public class ProvisionController {
     public String add_sale(@ModelAttribute Sale sale) {
 
         saleDAO.addSale(sale);
+
+        return "redirect:/home";
+    }
+
+    @GetMapping(value = "/deleteSale")
+    public String deleteEmployee(@RequestParam("id") int id){
+
+        saleDAO.deleteSale(id);
 
         return "redirect:/home";
     }
