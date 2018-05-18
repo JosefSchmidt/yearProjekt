@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>delete employee?</title>
+    <div th:replace="header :: header-css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="container d-flex justify-content-center">
+        <h1>Er du sikker på du vil slette <span th:text="@{employee.name}"/>?</h1>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <a class="btn btn-outline-danger" style="margin-right: 10px;" href="@{'/delete' + employee_id}">ja</a>
+        <a class="btn btn-outline-primary" th:href="@{/home}">nej</a>
+
+    </div>
+</div>
+
+</body>
+</html>
