@@ -5,18 +5,6 @@
     <title>Admin-side</title>
     <div th:replace="header_admin :: header-css"/>
 
-
-
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous"/>
-    <link rel="stylesheet" href="../static/mainCss.css"/>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
 </head>
 <body>
 <div th:replace="header_admin :: header-admin"/>
@@ -50,7 +38,6 @@
             <td th:text="${employee.provision_accumulated}"/>
 
             <td>
-<<<<<<< HEAD
                 <a class="btn btn-outline-success" th:href="@{'/Sale' + employee.employee_id}">Salg</a>
 
 
@@ -62,7 +49,7 @@
                 <!-- Modal -->
                 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content" style="color: black;">
+                        <div class="modal-content" style="color:black;">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="confirmModalLabel">Er du sikker på du vil slette!</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -72,17 +59,15 @@
                             <div class="modal-body">
                                 <p>Er du sikker på du vil Slette denne bruger? Brugeren vil blive slettet permanent!</p>
                             </div>
-                            <div class="modal-footer" style="color: black">
+                            <div class="modal-footer" >
                                 <a class="btn btn-outline-primary" data-dismiss="modal" href="#">Luk</a>
-                                <a class="btn btn-outline-danger" th:href="@{/delete_employee}">Slet</a>
+                                <a class="btn btn-outline-danger" th:href="@{'/delete' + employee.employee_id}">Slet Medarbejder</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--modal end-->
 
-=======
-                <a class="btn btn-outline-danger" th:href="@{'/delete' + employee.employee_id}">Slet Medarbejder</a>
->>>>>>> master
             </td>
 
         </tr>
@@ -108,20 +93,12 @@
         <tbody>
         <tr>
             <td class="text-center d-flex">Butiksmål</td>
-<<<<<<< HEAD
+
             <td th:text="${store.ga_sale_total}"/>
             <td th:text="${store.fl_sale_total}"/>
             <td th:text="${store.vas_sale_total}"/>
             <td th:text="${store.accessories_sale_total}"/>
-            <td><a class="btn btn-outline-danger" th:href="@{/}" style="color:white;">Rediger butiskmål</a></td>
-=======
-            <td th:text="${ga_total}"/>
-            <td th:text="${fl_total}"/>
-            <td th:text="${vas_total}"/>
-            <td th:text="${accessory_total}"/>
-
-            <td><a class="btn btn-outline-danger" href="@{/}">Rediger butiskmål</a></td>
->>>>>>> master
+            <td><a class="btn btn-outline-danger" th:href="@{/}">Rediger butiskmål</a></td>
         </tr>
         </tbody>
     </table>
