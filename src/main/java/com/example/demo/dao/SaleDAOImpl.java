@@ -3,6 +3,8 @@ package com.example.demo.dao;
 import com.example.demo.domain.Employee;
 import com.example.demo.domain.Provision;
 import com.example.demo.domain.Sale;
+import com.example.demo.services.ProvisionService;
+import com.example.demo.services.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,37 +24,6 @@ public class SaleDAOImpl implements SaleDAO {
     @Qualifier("dataSource")
     @Autowired
     private DataSource dataSource;
-
-//    //tilføjer en instance af Sale til tabellen, sale.
-//    @Override
-//    public void addSale(int ga_low_amount,
-//                        int ga_med_amount,
-//                        int ga_high_amount,
-//                        int ga_super_high_amount,
-//                        int fl_low_amount,
-//                        int fl_med_amount,
-//                        int fl_high_amount,
-//                        int fl_super_high_amount,
-//                        int vas_amount,
-//                        int accessory_amount,
-//                        int id) {
-//
-//
-//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//        jdbcTemplate.update("INSERT INTO sale(employee_id, ga_low_amount, ga_med_amount, ga_high_amount, ga_super_high_amount, fl_low_amount, fl_med_amount, fl_high_amount, fl_super_high_amount, vas_amount, accessory_amount) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-//                        id,
-//                        ga_low_amount,
-//                        ga_med_amount,
-//                        ga_high_amount,
-//                        ga_super_high_amount,
-//                        fl_low_amount,
-//                        fl_med_amount,
-//                        fl_high_amount,
-//                        fl_super_high_amount,
-//                        vas_amount,
-//                        accessory_amount);
-//    }
-
 
     @Override
     public void addSale(Sale sale){
@@ -111,18 +82,13 @@ public class SaleDAOImpl implements SaleDAO {
     @Override
     public void deleteSale(int id) {
 
-        int id_emp = 0;
+        int id_emp;
 
+        SaleService saleService = new SaleService();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         List<Integer> employee_id = jdbcTemplate.queryForList("SELECT employee_id FROM sale WHERE sale_id="+id, Integer.class);
-
-        for (int i = 0; i <employee_id.size(); i++) {
-            if(employee_id.get(i) != null) {
-                id_emp = employee_id.get(i);
-            }
-        }
-
+        id_emp = saleService.saleService(employee_id);
 
 
         jdbcTemplate.update("DELETE From sale WHERE sale_id="+id);
@@ -134,44 +100,29 @@ public class SaleDAOImpl implements SaleDAO {
 
     @Override
     public int viewEmployeeTotalGa(int id) {
-        int low_total = 0;
-        int med_total = 0;
-        int high_total = 0;
-        int super_high_total = 0;
+        int low_total, med_total, high_total, super_high_total;
 
+        SaleService saleService = new SaleService();
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         //List<Integer> modtager et Integer obejct via aggregate funktionen, sum, som lægger alle rows fra en attribut - hertil ga_low_amount.
         List<Integer> list_low = jdbcTemplate.queryForList("SELECT SUM(ga_low_amount) FROM sale WHERE employee_id="+id, Integer.class);
-
         //rows fra tabellen, sale, lægges sammen
-        for (int i = 0; i <list_low.size(); i++) {
-            if(list_low.get(i) != null)
-            low_total = list_low.get(i);
-        }
+        low_total = saleService.saleService(list_low);
 
 
         List<Integer> list_med = jdbcTemplate.queryForList("SELECT SUM(ga_med_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        med_total = saleService.saleService(list_med);
 
-        for (int i = 0; i <list_med.size(); i++) {
-            if(list_med.get(i) != null)
-            med_total = list_med.get(i);
-        }
 
         List<Integer> list_high = jdbcTemplate.queryForList("SELECT SUM(ga_high_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        high_total = saleService.saleService(list_high);
 
-        for (int i = 0; i <list_high.size(); i++) {
-            if(list_high.get(i) != null)
-            high_total = list_high.get(i);
-        }
 
         List<Integer> list_super_high = jdbcTemplate.queryForList("SELECT SUM(ga_super_high_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        super_high_total = saleService.saleService(list_super_high);
 
-        for (int i = 0; i <list_super_high.size(); i++) {
-            if(list_super_high.get(i) != null)
-            super_high_total = list_super_high.get(i);
-        }
 
         return low_total + med_total + high_total + super_high_total;
 
@@ -179,45 +130,27 @@ public class SaleDAOImpl implements SaleDAO {
 
     @Override
     public int viewEmployeeTotalFl(int id) {
-        int low_total = 0;
-        int med_total = 0;
-        int high_total = 0;
-        int super_high_total = 0;
+        int low_total, med_total, high_total, super_high_total;
+
+        SaleService saleService = new SaleService();
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 
-
-
-
-
         List<Integer> list_low = jdbcTemplate.queryForList("SELECT SUM(fl_low_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        low_total = saleService.saleService(list_low);
 
-        for (int i = 0; i <list_low.size(); i++) {
-            if(list_low.get(i) != null)
-            low_total = list_low.get(i);
-        }
 
         List<Integer> list_med = jdbcTemplate.queryForList("SELECT SUM(fl_med_amount) FROM sale WHERE employee_id="+id, Integer.class);
-
-        for (int i = 0; i <list_med.size(); i++) {
-            if(list_med.get(i) != null)
-            med_total = list_med.get(i);
-        }
+        med_total = saleService.saleService(list_med);
 
         List<Integer> list_high = jdbcTemplate.queryForList("SELECT SUM(fl_high_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        high_total = saleService.saleService(list_high);
 
-        for (int i = 0; i <list_high.size(); i++) {
-            if (list_high.get(i) != null)
-            high_total = list_high.get(i);
-        }
 
         List<Integer> list_super_high = jdbcTemplate.queryForList("SELECT SUM(fl_super_high_amount) FROM sale WHERE employee_id="+id, Integer.class);
 
-        for (int i = 0; i <list_high.size(); i++) {
-            if(list_super_high.get(i) != null)
-            super_high_total = list_super_high.get(i);
-        }
+        super_high_total = saleService.saleService(list_super_high);
 
         return low_total + med_total + high_total + super_high_total;
 
@@ -225,32 +158,27 @@ public class SaleDAOImpl implements SaleDAO {
 
     @Override
     public int viewEmployeeTotalVas(int id) {
-        int vas_total = 0;
+        int vas_total;
 
+        SaleService saleService = new SaleService();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         List<Integer> list_vas = jdbcTemplate.queryForList("SELECT SUM(vas_amount) FROM sale WHERE employee_id="+id, Integer.class);
-
-        for (int i = 0; i <list_vas.size(); i++) {
-            if(list_vas.get(i) != null)
-            vas_total = list_vas.get(i);
-        }
+        vas_total = saleService.saleService(list_vas);
 
         return vas_total;
     }
 
     @Override
     public int viewEmployeeTotalAcc(int id) {
-        int accessory_total = 0;
+        int accessory_total;
 
+        SaleService saleService = new SaleService();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         List<Integer> list_accessory = jdbcTemplate.queryForList("SELECT SUM(accessory_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        accessory_total = saleService.saleService(list_accessory);
 
-        for (int i = 0; i <list_accessory.size(); i++) {
-            if (list_accessory.get(i) != null)
-            accessory_total = list_accessory.get(i);
-        }
         return accessory_total;
     }
 
@@ -258,95 +186,55 @@ public class SaleDAOImpl implements SaleDAO {
 
     @Override
     public void viewProvisionTotal(int id) {
-        int low_ga_total = 0;
-        int med_ga_total = 0;
-        int high_ga_total = 0;
-        int super_high_ga_total = 0;
-        int ga_total = 0;
+        int low_ga_total, med_ga_total, high_ga_total, super_high_ga_total;
+        int low_fl_total, med_fl_total, high_fl_total, super_high_fl_total;
 
-        int low_fl_total = 0;
-        int med_fl_total = 0;
-        int high_fl_total = 0;
-        int super_high_fl_total = 0;
-        int fl_total = 0;
+        int ga_total, fl_total, vas_total, accessory_total;
+        int provisionTotal;
 
-        int vas_total = 0;
 
-        int accessory_total = 0;
-
-        int provisionTotal = 0;
-
+        ProvisionService provisionService = new ProvisionService();
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 
         //SAMLER GA-POINT
-
         //List<Integer> modtager et Integer obejct via aggregate funktionen, sum, som lægger alle rows fra en attribut - hertil ga_low_amount.
         List<Integer> list_ga_low = jdbcTemplate.queryForList("SELECT SUM(ga_low_amount) FROM sale WHERE employee_id="+id, Integer.class);
-
         //rows fra tabellen, sale, lægges sammen
-        for (int i = 0; i <list_ga_low.size(); i++) {
-            if(list_ga_low.get(i) != null)
-            //Ganger med attributen i instancen Provision for at få samlet point
-            low_ga_total = list_ga_low.get(i) * Provision.getGa_low();
-        }
+        low_ga_total = provisionService.ga_low(list_ga_low);
+
 
         List<Integer> list_ga_med = jdbcTemplate.queryForList("SELECT SUM(ga_med_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        med_ga_total = provisionService.ga_med(list_ga_med);
 
-        for (int i = 0; i <list_ga_med.size(); i++) {
-            if(list_ga_med.get(i) != null)
-            med_ga_total = list_ga_med.get(i) * Provision.getGa_med();
-        }
 
         List<Integer> list_ga_high = jdbcTemplate.queryForList("SELECT SUM(ga_high_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        high_ga_total = provisionService.ga_high(list_ga_high);
 
-        for (int i = 0; i <list_ga_high.size(); i++) {
-            if(list_ga_high.get(i) != null)
-            high_ga_total = list_ga_high.get(i) * Provision.getGa_high();
-        }
 
         List<Integer> list_ga_super_high = jdbcTemplate.queryForList("SELECT SUM(ga_super_high_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        super_high_ga_total = provisionService.ga_super_high(list_ga_super_high);
 
-        for (int i = 0; i <list_ga_super_high.size(); i++) {
-            if(list_ga_super_high.get(i) != null)
-            super_high_ga_total = list_ga_super_high.get(i) * Provision.getGa_super_high();
-        }
 
         ga_total = low_ga_total + med_ga_total + high_ga_total + super_high_ga_total;
 
 
-
-
         //SAMLER FL-POINT
-
         List<Integer> list_fl_low = jdbcTemplate.queryForList("SELECT SUM(fl_low_amount) FROM sale WHERE employee_id="+id, Integer.class);
-
-        for (int i = 0; i <list_fl_low.size(); i++) {
-            if(list_fl_low.get(i) != null)
-            low_fl_total = list_fl_low.get(i) * Provision.getFl_low();
-        }
+        low_fl_total = provisionService.fl_low(list_fl_low);
 
         List<Integer> list_fl_med = jdbcTemplate.queryForList("SELECT SUM(fl_med_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        med_fl_total = provisionService.fl_med(list_fl_med);
 
-        for (int i = 0; i <list_fl_med.size(); i++) {
-            if(list_fl_med.get(i) != null)
-            med_fl_total = list_fl_med.get(i) * Provision.getFl_med();
-        }
 
         List<Integer> list_fl_high = jdbcTemplate.queryForList("SELECT SUM(fl_high_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        high_fl_total = provisionService.fl_high(list_fl_high);
 
-        for (int i = 0; i <list_fl_high.size(); i++) {
-            if (list_fl_med.get(i) != null)
-            high_fl_total = list_fl_high.get(i) * Provision.getFl_high();
-        }
 
         List<Integer> list_fl_super_high = jdbcTemplate.queryForList("SELECT SUM(fl_super_high_amount) FROM sale WHERE employee_id="+id, Integer.class);
+        super_high_fl_total = provisionService.fl_super_high(list_fl_super_high);
 
-        for (int i = 0; i <list_fl_high.size(); i++) {
-            if (list_fl_super_high.get(i) != null)
-            super_high_fl_total = list_fl_super_high.get(i) * Provision.getFl_super_high();
-        }
 
         fl_total = low_fl_total + med_fl_total + high_fl_total + super_high_fl_total;
 
@@ -354,37 +242,22 @@ public class SaleDAOImpl implements SaleDAO {
 
 
         //SAMLER VAS-POINT
-
         List<Integer> list_vas = jdbcTemplate.queryForList("SELECT SUM(vas_amount) FROM sale WHERE employee_id="+id, Integer.class);
-
-        for (int i = 0; i <list_vas.size(); i++) {
-            if(list_vas.get(i) != null)
-            vas_total = list_vas.get(i) * Provision.getVas();
-        }
+        vas_total = provisionService.vas(list_vas);
 
 
         //SAMLER ACCESSORY-POINT
-
         List<Integer> list_accessory = jdbcTemplate.queryForList("SELECT SUM(accessory_amount) FROM sale WHERE employee_id="+id, Integer.class);
-
-        for (int i = 0; i <list_accessory.size(); i++) {
-            if(list_accessory.get(i) != null)
-            accessory_total = list_accessory.get(i) * Provision.getAccessories();
-        }
+        accessory_total = provisionService.accessory(list_accessory);
 
 
         //SAMLER PROVISION TOTAL
-
         provisionTotal = ga_total+fl_total+vas_total+accessory_total;
 
 
         jdbcTemplate.update("UPDATE employee SET provision_accumulated =(?) WHERE id =(?)", provisionTotal, id);
 
-
-
-
     }
-
 
 
 }

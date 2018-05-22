@@ -75,17 +75,4 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     }
 
-
-
-
-//    @Override
-//    public int getEmployee(int id) {
-//            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//            return jdbcTemplate.queryForObject("SELECT id FROM employee WHERE id="+id, Integer.class);
-//    }
-
-
-
-
-
 }
