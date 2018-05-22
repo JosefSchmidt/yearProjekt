@@ -18,7 +18,7 @@ public class EmployeeController {
     @Autowired
     SaleDAO saleDAO;
 
-
+    //Opretter en ny Employee (Get metode)
     @GetMapping(value = "/add_employee")
     public String add_employee(Model model){
 
@@ -27,6 +27,7 @@ public class EmployeeController {
         return "add_employee";
     }
 
+    //Opretter en ny Employee (Post metode)
     @PostMapping(value = "/add_employee")
     public String add_employee(@RequestParam String name, @RequestParam String position, @RequestParam int provision_goal){
 
@@ -35,6 +36,7 @@ public class EmployeeController {
         return "redirect:/home_admin";
     }
 
+    //Sletter en Employee
     @GetMapping(value = "/deleteEmployee")
     public String deleteEmployee(@RequestParam("id") int id){
 
@@ -43,6 +45,7 @@ public class EmployeeController {
         return "redirect:/home_admin";
     }
 
+    //Viser én employees opnået salg af GA, FL, Vas, accessories, samt hans opnået provision.
     @GetMapping(value = "/sale_info")
     public String sale_info(Model model, @RequestParam("id") int id){
 

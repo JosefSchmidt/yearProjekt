@@ -25,6 +25,13 @@ public class SaleDAOImpl implements SaleDAO {
     @Autowired
     private DataSource dataSource;
 
+
+    @Autowired
+    ProvisionService provisionService;
+
+    @Autowired
+    SaleService saleService;
+
     @Override
     public void addSale(Sale sale){
 
@@ -84,7 +91,7 @@ public class SaleDAOImpl implements SaleDAO {
 
         int id_emp;
 
-        SaleService saleService = new SaleService();
+
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         List<Integer> employee_id = jdbcTemplate.queryForList("SELECT employee_id FROM sale WHERE sale_id="+id, Integer.class);
@@ -101,8 +108,6 @@ public class SaleDAOImpl implements SaleDAO {
     @Override
     public int viewEmployeeTotalGa(int id) {
         int low_total, med_total, high_total, super_high_total;
-
-        SaleService saleService = new SaleService();
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
@@ -132,8 +137,6 @@ public class SaleDAOImpl implements SaleDAO {
     public int viewEmployeeTotalFl(int id) {
         int low_total, med_total, high_total, super_high_total;
 
-        SaleService saleService = new SaleService();
-
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 
@@ -160,7 +163,6 @@ public class SaleDAOImpl implements SaleDAO {
     public int viewEmployeeTotalVas(int id) {
         int vas_total;
 
-        SaleService saleService = new SaleService();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         List<Integer> list_vas = jdbcTemplate.queryForList("SELECT SUM(vas_amount) FROM sale WHERE employee_id="+id, Integer.class);
@@ -173,7 +175,6 @@ public class SaleDAOImpl implements SaleDAO {
     public int viewEmployeeTotalAcc(int id) {
         int accessory_total;
 
-        SaleService saleService = new SaleService();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         List<Integer> list_accessory = jdbcTemplate.queryForList("SELECT SUM(accessory_amount) FROM sale WHERE employee_id="+id, Integer.class);
@@ -191,9 +192,6 @@ public class SaleDAOImpl implements SaleDAO {
 
         int ga_total, fl_total, vas_total, accessory_total;
         int provisionTotal;
-
-
-        ProvisionService provisionService = new ProvisionService();
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 

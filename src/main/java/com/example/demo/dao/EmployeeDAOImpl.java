@@ -1,6 +1,8 @@
 package com.example.demo.dao;
 
 import com.example.demo.domain.Employee;
+import com.example.demo.services.ProvisionService;
+import com.example.demo.services.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;

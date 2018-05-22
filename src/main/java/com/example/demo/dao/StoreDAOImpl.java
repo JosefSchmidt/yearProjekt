@@ -17,13 +17,15 @@ public class StoreDAOImpl implements StoreDAO {
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    SaleService saleService;
+
 
     @Override
     public int viewTotalGa() {
 
         int low_total, med_total, high_total, super_high_total;
 
-        SaleService saleService = new SaleService();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         //List<Integer> modtager et Integer obejct via aggregate funktionen, sum, som lægger alle rows fra en attribut - hertil ga_low_amount.
@@ -51,7 +53,6 @@ public class StoreDAOImpl implements StoreDAO {
 
         int low_total, med_total, high_total, super_high_total;
 
-        SaleService saleService = new SaleService();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         List<Integer> list_low = jdbcTemplate.queryForList("SELECT SUM(fl_low_amount) FROM sale", Integer.class);
@@ -74,7 +75,6 @@ public class StoreDAOImpl implements StoreDAO {
 
         int vas_total;
 
-        SaleService saleService = new SaleService();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         List<Integer> list_vas = jdbcTemplate.queryForList("SELECT SUM(vas_amount) FROM sale", Integer.class);
@@ -89,7 +89,6 @@ public class StoreDAOImpl implements StoreDAO {
 
         int accessory_total = 0;
 
-        SaleService saleService = new SaleService();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         List<Integer> list_accessory = jdbcTemplate.queryForList("SELECT SUM(accessory_amount) FROM sale", Integer.class);
