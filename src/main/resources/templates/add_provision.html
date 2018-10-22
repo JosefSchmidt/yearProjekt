@@ -7,17 +7,32 @@
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg bg-dark" >
+    <div class="container" style="color: white;">
+        <a th:href="@{/home}"><img id="3-logo" src="https://www.seeklogo.net/wp-content/uploads/2014/01/3-mobile-vector-logo.png" alt="3 image" style="height: 50px;"/></a>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/home}" style="text-decoration: none; color: white;">Forside</a>
+                </li>
+            </ul>
+            <ul class="nav justify-content-end">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/home}" style="text-decoration: none; color: white;">Tilbage</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<div class="container" style="margin-top: 100px;">
+
+<div class="container" style="margin-top: 50px;">
     <h1>Provision</h1>
 </div>
 
 <div class="container">
 
-
-
-
-    <form method="Post" th:action="@{/add_provision}" th:object="${sale}">
+    <form method="Post" th:action="@{/add_sale}" th:object="${sale}">
 <div class="row">
     <div class="col-4">
         <div class="card ">
@@ -97,7 +112,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="margin-top: 40px">
             <div class="card-header">Tilbehør</div>
             <div class="form-group card-body">
                 <input type="text" class="form-control" id="accessory"  name="accessory" placeholder="Accessory"
@@ -110,14 +125,14 @@
             <input type="hidden" th:field="*{employee_id}" th:value="${id}"/>
         </div>
 
+        <div class="form-group" style="margin-top: 40px; margin-left: 65px;">
+            <div class="col-sm-10 col-sm-offset-2">
+                <input class="btn btn-primary" style="width: 130px; height: 40px;" type="submit" value="Opret"/>
+            </div>
+        </div>
 
 
 </div>
-        <div class="form-group" style="margin-top: 20px;">
-            <div class="col-sm-10 col-sm-offset-2">
-                <input class="btn btn-primary" type="submit" value="Opret"/>
-            </div>
-        </div>
 
 </div>
 

@@ -12,20 +12,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 
 
-
+    // logger admin ind på baggrund af Spring Sec, og sender ham over til index
     @GetMapping(value = {"/login",})
     public String login(){
 
         return "login";
     }
 
-
+    //index redirector til "home_admin".
     @GetMapping(value = {"/", ""})
     public String index(){
 
         return "redirect:/home_admin";
     }
 
+
+    // logger admin ud
     @PostMapping(value = "/logout")
     public String logout(){
 

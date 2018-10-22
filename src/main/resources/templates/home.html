@@ -27,6 +27,8 @@
         </thead>
 
         <tbody>
+
+        <!-- En forloop af Employees -->
         <tr th:each="employee : ${employees}">
 
             <td th:text="${employee.name}"/>
@@ -34,14 +36,15 @@
             <td th:text="${employee.provision_goal}"/>
             <td th:text="${employee.provision_accumulated}"/>
             <td>
-                <a  th:href="${'/add_provision?id=' + employee.id}" class="btn btn-outline-success">Tilføj provision</a>
+                <!-- Knapper som linker til URL-->
+                <a  th:href="${'/add_sale?id=' + employee.id}" class="btn btn-outline-success">Tilføj provision</a>
                 <a  th:href="${'/sale_info?id=' + employee.id}" class="btn btn-outline-primary">Salgs historik</a>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <h1>Butiks oversigt</h1>
+    <h1>Butiksoversigt</h1>
     <table class="table table-striped table-bordered table-hover table-dark">
         <thead>
         <tr>

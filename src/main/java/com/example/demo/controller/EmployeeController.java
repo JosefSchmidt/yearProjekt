@@ -24,7 +24,9 @@ public class EmployeeController {
 
         model.addAttribute("employee", new Employee());
 
+
         return "add_employee";
+
     }
 
     //Opretter en ny Employee (Post metode)
@@ -50,7 +52,6 @@ public class EmployeeController {
     public String sale_info(Model model, @RequestParam("id") int id){
 
 
-
         model.addAttribute("sales", saleDAO.viewEmployeeSales(id));
 
         model.addAttribute("ga_total", saleDAO.viewEmployeeTotalGa(id));
@@ -58,12 +59,10 @@ public class EmployeeController {
         model.addAttribute("vas_total", saleDAO.viewEmployeeTotalVas(id));
         model.addAttribute("accessory_total", saleDAO.viewEmployeeTotalAcc(id));
 
-
-
-        model.addAttribute("sale", new Sale(id));
-
         return "sale_info";
     }
+
+
 
 
 }

@@ -22,6 +22,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     private DataSource dataSource;
 
 
+
     //tilføjer employee til databasen ved brug af et prepared statement
     @Override
     public void addEmployee(String name, String position, int provision_goal) {
@@ -37,18 +38,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public List viewEmployee() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
-        String sql = "SELECT * FROM employee";
-
-
+        //list som har til formål at holde på vores data fra tabellen
         List<Employee> employees = new ArrayList<>();
 
-
-        //List af Employee. Map definer keys (Employee attributter) til value (Employee instance)
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+        //(kan bruge den samme struktur flere gange)
+        //List af Employee. Map definer keys (String) til value (objektet)
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT * FROM employee");
 
         //For loop af rows (Employees)
         for (Map row : rows) {
 
+            //Her laves en ny instanse af Employee for hver row.
             Employee employee = new Employee();
 
             //Angiver keys til value
@@ -59,11 +59,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             employee.setProvision_accumulated((int) (row.get("provision_accumulated")));
 
 
-            //Tilføjer til vores employees list
+            //Tilføjer til vores List af employees
             employees.add(employee);
 
         }
 
+        //returner List af Employees
         return employees;
     }
 

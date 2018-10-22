@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class Sale {
@@ -26,6 +27,7 @@ public class Sale {
     private int fl_super_high_amount;
 
     private int vas_amount;
+
     private int accessory_amount;
 
 

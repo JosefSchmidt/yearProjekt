@@ -18,11 +18,10 @@ public class HomeController {
     @Autowired
     EmployeeDAO employeeDAO;
 
-
-    @GetMapping(value = "home")
+    //Fremviser alle employees og deres attributter
+    //Fremviser Stores total af GA, FL, Vas og accessories.
+    @GetMapping(value = "/home")
     public String home(Model model){
-
-
 
         model.addAttribute("employees", employeeDAO.viewEmployee());
 

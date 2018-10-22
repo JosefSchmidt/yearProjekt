@@ -19,7 +19,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
-
     //
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -34,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/home", "/add_provision*", "/sale_info*", "/deleteSale*").permitAll()
+                .authorizeRequests().antMatchers("/home", "/add_sale*", "/sale_info*", "/delete_sale*").permitAll()
                 .antMatchers("/admin/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()

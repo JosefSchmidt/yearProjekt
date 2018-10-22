@@ -1,18 +1,15 @@
 package com.example.demo.dao;
 
-import com.example.demo.domain.Employee;
-import com.example.demo.domain.Provision;
 import com.example.demo.domain.Sale;
 import com.example.demo.services.ProvisionService;
 import com.example.demo.services.SaleService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.sql.DataSource;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,15 +29,40 @@ public class SaleDAOImpl implements SaleDAO {
     @Autowired
     SaleService saleService;
 
+
+    //Tilføjer sale objectet til tabellen sale.
     @Override
     public void addSale(Sale sale){
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
-        jdbcTemplate.update("INSERT into sale (employee_id, ga_low_amount, ga_med_amount, ga_high_amount, ga_super_high_amount, fl_low_amount, fl_med_amount, fl_high_amount, fl_super_high_amount, vas_amount, accessory_amount)" +
-                "VALUES ('" + sale.getEmployee_id() + "', '" + sale.getGa_low_amount()+ "', '" + sale.getGa_med_amount() + "', '" + sale.getGa_high_amount() + "', '" + sale.getGa_super_high_amount()+ "', '" + sale.getFl_low_amount()+ "', '" + sale.getFl_med_amount()+ "', '" + sale.getFl_high_amount()+ "', '" + sale.getFl_super_high_amount()+ "', '" + sale.getVas_amount()+ "', '" + sale.getAccessory_amount() + "')");
+        jdbcTemplate.update("INSERT into sale (" +
+                "employee_id, " +
+                "ga_low_amount, " +
+                "ga_med_amount, " +
+                "ga_high_amount, " +
+                "ga_super_high_amount, " +
+                "fl_low_amount, " +
+                "fl_med_amount, " +
+                "fl_high_amount, " +
+                "fl_super_high_amount, " +
+                "vas_amount, " +
+                "accessory_amount)" +
+                "VALUES ('" +
+                sale.getEmployee_id() + "', '" +
+                sale.getGa_low_amount()+ "', '" +
+                sale.getGa_med_amount() + "', '" +
+                sale.getGa_high_amount() + "', '" +
+                sale.getGa_super_high_amount()+ "', '" +
+                sale.getFl_low_amount()+ "', '"
+                + sale.getFl_med_amount()+ "', '" +
+                sale.getFl_high_amount()+ "', '" +
+                sale.getFl_super_high_amount()+ "', '" +
+                sale.getVas_amount()+ "', '" +
+                sale.getAccessory_amount() + "')");
 
 
+        //opdater provision_accumulated
         viewProvisionTotal(sale.getEmployee_id());
 
 
@@ -53,11 +75,9 @@ public class SaleDAOImpl implements SaleDAO {
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
-        String sql = "SELECT * FROM sale WHERE employee_id="+id;
-
         List<Sale> sales = new ArrayList<>();
 
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT * FROM sale WHERE employee_id="+id);
 
         //For loop af rows (sales)
         for (Map row : rows) {
@@ -86,6 +106,7 @@ public class SaleDAOImpl implements SaleDAO {
         return sales;
     }
 
+    // sletter sale i tabellen på baggrund af id
     @Override
     public void deleteSale(int id) {
 
@@ -104,7 +125,7 @@ public class SaleDAOImpl implements SaleDAO {
 
     }
 
-
+    // På baggrund af id-employee, hentes den totale sum af GA fra tabellen sale
     @Override
     public int viewEmployeeTotalGa(int id) {
         int low_total, med_total, high_total, super_high_total;
@@ -115,6 +136,8 @@ public class SaleDAOImpl implements SaleDAO {
         List<Integer> list_low = jdbcTemplate.queryForList("SELECT SUM(ga_low_amount) FROM sale WHERE employee_id="+id, Integer.class);
         //rows fra tabellen, sale, lægges sammen
         low_total = saleService.saleService(list_low);
+
+
 
 
         List<Integer> list_med = jdbcTemplate.queryForList("SELECT SUM(ga_med_amount) FROM sale WHERE employee_id="+id, Integer.class);
@@ -133,6 +156,7 @@ public class SaleDAOImpl implements SaleDAO {
 
     }
 
+    // På baggrund af id-employee, hentes den totale sum af FL fra tabellen sale
     @Override
     public int viewEmployeeTotalFl(int id) {
         int low_total, med_total, high_total, super_high_total;
@@ -159,6 +183,7 @@ public class SaleDAOImpl implements SaleDAO {
 
     }
 
+    // På baggrund af id-employee, hentes den totale sum af vas fra tabellen sale
     @Override
     public int viewEmployeeTotalVas(int id) {
         int vas_total;
@@ -171,6 +196,7 @@ public class SaleDAOImpl implements SaleDAO {
         return vas_total;
     }
 
+    // På baggrund af id-employee, hentes den totale sum af accessory fra tabellen sale
     @Override
     public int viewEmployeeTotalAcc(int id) {
         int accessory_total;
@@ -184,22 +210,31 @@ public class SaleDAOImpl implements SaleDAO {
     }
 
 
-
+    // På baggrund af id-employee, hentes provision_accumulated.
     @Override
     public void viewProvisionTotal(int id) {
+
         int low_ga_total, med_ga_total, high_ga_total, super_high_ga_total;
+
         int low_fl_total, med_fl_total, high_fl_total, super_high_fl_total;
 
-        int ga_total, fl_total, vas_total, accessory_total;
+        int ga_total;
+        int fl_total;
+
+        int vas_total;
+        int accessory_total;
+
         int provisionTotal;
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 
         //SAMLER GA-POINT
-        //List<Integer> modtager et Integer obejct via aggregate funktionen, sum, som lægger alle rows fra en attribut - hertil ga_low_amount.
+
+        //List<Integer> modtager et Integer objekt via aggregate funktionen, sum, som lægger alle rows fra en attribut - hertil ga_low_amount.
         List<Integer> list_ga_low = jdbcTemplate.queryForList("SELECT SUM(ga_low_amount) FROM sale WHERE employee_id="+id, Integer.class);
-        //rows fra tabellen, sale, lægges sammen
+
+        //kalder ga_low metode for at se List er tom, og for at gange indholdet med tilsvarende provision.
         low_ga_total = provisionService.ga_low(list_ga_low);
 
 
@@ -214,7 +249,7 @@ public class SaleDAOImpl implements SaleDAO {
         List<Integer> list_ga_super_high = jdbcTemplate.queryForList("SELECT SUM(ga_super_high_amount) FROM sale WHERE employee_id="+id, Integer.class);
         super_high_ga_total = provisionService.ga_super_high(list_ga_super_high);
 
-
+        //samler provision fra de forskellige typer GA salg
         ga_total = low_ga_total + med_ga_total + high_ga_total + super_high_ga_total;
 
 
@@ -234,6 +269,7 @@ public class SaleDAOImpl implements SaleDAO {
         super_high_fl_total = provisionService.fl_super_high(list_fl_super_high);
 
 
+        //samler provision fra de forskellige typer FL salg
         fl_total = low_fl_total + med_fl_total + high_fl_total + super_high_fl_total;
 
 
@@ -249,10 +285,12 @@ public class SaleDAOImpl implements SaleDAO {
         accessory_total = provisionService.accessory(list_accessory);
 
 
+
         //SAMLER PROVISION TOTAL
         provisionTotal = ga_total+fl_total+vas_total+accessory_total;
 
 
+        //opdater provision_accumulated på baggrund af employee id
         jdbcTemplate.update("UPDATE employee SET provision_accumulated =(?) WHERE id =(?)", provisionTotal, id);
 
     }

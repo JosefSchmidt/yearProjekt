@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.domain.Sale;
 import com.example.demo.services.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,6 +22,8 @@ public class StoreDAOImpl implements StoreDAO {
 
     @Override
     public int viewTotalGa() {
+
+
 
         int low_total, med_total, high_total, super_high_total;
 
